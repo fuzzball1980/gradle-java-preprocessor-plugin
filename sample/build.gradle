@@ -4,13 +4,15 @@ buildscript {
         mavenLocal() //for developer.
     }
     dependencies {
-        classpath 'wang.dannyhe.tools:plugin:latest.release'
+        // classpath 'wang.dannyhe.tools:plugin:latest.release'
+        classpath files('../plugin/build/libs/plugin-0.0.8.jar')
     }
 }
 apply plugin: 'com.android.application'
 apply plugin: 'wang.dannyhe.tools.preprocessor'
 
 android {
+    namespace = "tools.dannyhe.wang.sample"
     compileSdkVersion 23
     buildToolsVersion '25.0.0'
 
@@ -55,10 +57,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
-    compile 'com.android.support:design:23.4.0'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:appcompat-v7:23.4.0'
+    implementation 'com.android.support:design:23.4.0'
 }
 
 // global setting
@@ -74,5 +76,5 @@ task customProcessJavaTask(type:wang.dannyhe.tools.PreprocessorTask) {
     sourceDir file("src/main/java")
     targetDir file("src/main/java")
     symbols "FREE_VERSION,PRINT"
-    verbose true
+    // verbose true
 }

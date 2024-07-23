@@ -1,15 +1,18 @@
 plugins {
-    id 'nu.studer.plugindev' version '1.0.3'
+    id 'nu.studer.plugindev' version '4.1'
 
     // Should come along with plugindev, but plugindev uses an old version
-    id 'com.jfrog.bintray' version '1.6'
+    // id 'com.jfrog.bintray' version '1.8.5'
+
+    id 'java-gradle-plugin'
+    id "com.gradle.plugin-publish" version "0.20.0"
 }
 
 apply plugin: 'groovy'
 
 dependencies {
-    compile gradleApi()
-    compile localGroovy()
+    implementation gradleApi()
+    implementation localGroovy()
 }
 
 // This makes it easier to figure out issues with Travis CI builds
@@ -17,24 +20,45 @@ test {
     testLogging.showStandardStreams = true
 }
 
-apply plugin: 'maven'
+apply plugin: 'maven-publish'
 
 repositories {
     mavenCentral()
+    google()
 }
 
 
-dependencies {
-    compile 'org.apache.ant:ant:1.8.4'
-    testCompile 'junit:junit:4.11'
-}
+/*dependencies {
+    implementation 'org.apache.ant:ant:1.8.4'
+    testImplementation 'junit:junit:4.11'
+}*/
 
 
 group='wang.dannyhe.tools'
-version='0.0.7'
+version='0.0.8'
 
+gradlePlugin {
+    plugins {
+        myPlugin {
+            id = 'wang.dannyhe.tools.preprocessor'
+            implementationClass = 'wang.dannyhe.tools.PreprocessorPlugin'
+        }
+    }
+}
 
-plugindev {
+pluginBundle {
+    website = 'https://github.com/dannyjiajia/gradle-java-preprocessor-plugin'
+    vcsUrl = 'https://github.com/dannyjiajia/gradle-java-preprocessor-plugin'
+    description = 'Gradle plugin that lets an Android project use antenna preprocess.'
+
+    plugins {
+        myPlugin {
+            displayName = 'plugin'
+        }
+    }
+}
+
+/*plugindev {
     pluginId 'wang.dannyhe.tools.preprocessor'
     pluginName 'plugin'
     pluginImplementationClass 'wang.dannyhe.tools.PreprocessorPlugin'
@@ -47,7 +71,7 @@ plugindev {
     projectUrl 'https://github.com/dannyjiajia/gradle-java-preprocessor-plugin'
     projectInceptionYear '2016'
     done() // do not omit this
-}
+}*/
 
 // we read the config infomation from "local.properties"
 def Properties loadLocalProp() {

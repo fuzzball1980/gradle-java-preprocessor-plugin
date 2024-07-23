@@ -13,9 +13,38 @@ public class PreprocessorTask extends DefaultTask {
 
     File sourceDir
     File targetDir
+
     String symbols
     String encoding = "UTF-8"
     boolean verbose = true
+
+    @Input
+    boolean isVerbose() {
+        return verbose;
+    }
+
+    @Internal
+    boolean getVerbose() {
+        return verbose;
+    }
+
+    @Input
+    String getSymbols() {
+        return symbols;
+    }
+
+    void setSymbols(String symbols) {
+        this.symbols  = symbols;
+    }
+
+    @Input
+    String getEncoding() {
+        return encoding;
+    }
+
+    void setEncoding(String encoding) {
+         this.encoding = encoding;
+    }
 
     @TaskAction
     def process() {
@@ -63,9 +92,9 @@ public class PreprocessorTask extends DefaultTask {
     }
 
     void log(String msg) {
-        if (verbose) {
+        //if (verbose) {
             println(msg)
-        }
+        //}
     }
 
     @InputDirectory

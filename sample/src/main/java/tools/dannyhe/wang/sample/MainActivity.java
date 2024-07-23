@@ -31,13 +31,13 @@ public class MainActivity extends AppCompatActivity {
 //@				sb.append(" FREE");
 				//#endif
 				//#ifdef XIAOMI
-				sb.append(" XIAOMI");
+//@				sb.append(" XIAOMI");
 				//#endif
 				//#ifdef HUAWEI
 //@				sb.append(" HUAWEI");
 				//#endif
 				//#ifdef VIP
-				sb.append(" VIP");
+//@				sb.append(" VIP");
 				//#endif
 				//#if VERSION >= 5
 //@				sb.append(" VERSION >= 5");
